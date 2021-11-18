@@ -28,7 +28,6 @@ jobs:
       run: |
         dotnet publish ${{ env.DIR_WEBAPP }} -c Release -o app
         cd ./app
-        dotnet SiteContagem.dll
         nohup dotnet SiteContagem.dll > ${{ env.LOG_EXECUTION_WEB }} 2>&1 &
         echo 'Aguardando a inicialização da aplicação a ser testada...'
         sleep 10s
@@ -37,6 +36,7 @@ jobs:
       with:
         filename: ${{ env.TEST_SCRIPTS }}
     - name: Executar log execução da aplicação após testes
+      if: always()
       run: cat ${{ env.LOG_EXECUTION_WEB }}
 
   build:
