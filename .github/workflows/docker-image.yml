@@ -33,10 +33,15 @@ jobs:
         nohup dotnet SiteContagem.dll > ${{ env.LOG_EXECUTION_WEB }} 2>&1 &
         echo 'Aguardando a inicialização da aplicação a ser testada...'
         sleep 10s
-    - name: Testes de carga com k6
-      uses: grafana/k6-action@v0.2.0
-      with:
-        filename: ${{ env.TEST_SCRIPTS }}
+    - name: Instalar o k6
+      run: |
+        curl https://github.com/loadimpact/k6/releases/download/v0.26.2/k6-v0.26.2-linux64.tar.gz -L | tar xvz --strip-components 1
+        k6
+
+    #- name: Testes de carga com k6
+    #  uses: grafana/k6-action@v0.2.0
+    #  with:
+    #    filename: ${{ env.TEST_SCRIPTS }}
     - name: Testes
       if: always()
       run: |
