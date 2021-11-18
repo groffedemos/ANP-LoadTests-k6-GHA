@@ -18,6 +18,17 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Setup .NET 6
+      uses: actions/setup-dotnet@v1.8.2
+      with:
+        dotnet-version: 6.0.100
+    - name: Executar a aplicação a ser testada em background (nohup)
+      run: |
+        dotnet publish $(Path_Projeto) -c Release -o app
+        cd ./app
+        nohup dotnet SiteContagem.dll 2>&1 &
+        echo 'Aguardando a inicialização da aplicação a ser testada...'
+        sleep 10s
     - name: Testes de carga com k6
       uses: grafana/k6-action@v0.2.0
       with:
