@@ -46,7 +46,7 @@ jobs:
     - name: Executar testes de carga com k6
       run: |
         ./k6 run ${{ env.TEST_SCRIPTS }}
-    - name: Executar log execução da aplicação após testes
+    - name: Exibir log de execução da aplicação após testes
       if: always()
       run: |
         cd ./app
