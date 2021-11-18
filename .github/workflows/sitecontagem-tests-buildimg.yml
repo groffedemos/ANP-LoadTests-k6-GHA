@@ -11,8 +11,7 @@ env:
   DIR_WEBAPP: './SiteContagem'
   LOG_EXECUTION_WEB: 'execution-webapp.log'
   DIR_TESTS: './Tests'
-  TEST_SCRIPTS: 'tests-sitecontagem.js'
-  #TEST_SCRIPTS: './Tests/tests-sitecontagem.js'
+  TEST_SCRIPTS: './Tests/tests-sitecontagem.js'
   
 jobs:
 
@@ -45,7 +44,7 @@ jobs:
     #    filename: ${{ env.TEST_SCRIPTS }}
     - name: Executar testes de carga com k6
       run: |
-        ./k6 ${{ env.TEST_SCRIPTS }}
+        ./k6 run ${{ env.TEST_SCRIPTS }}
     - name: Executar log execução da aplicação após testes
       if: always()
       run: |
