@@ -7,9 +7,10 @@ on:
     branches: [ main ]
 
 env:
-  DIR_WEBAPP: ./SiteContagem
-  TEST_SCRIPTS: ./Tests/tests-sitecontagem.js
   ASPNETCORE_URLS: 'http://localhost:5000'
+  DIR_WEBAPP: './SiteContagem'
+  LOG_EXECUTION_WEB: './execution-webapp.log'
+  TEST_SCRIPTS: './Tests/tests-sitecontagem.js'
   
 jobs:
 
@@ -27,13 +28,15 @@ jobs:
       run: |
         dotnet publish ${{ env.DIR_WEBAPP }} -c Release -o app
         cd ./app
-        nohup dotnet SiteContagem.dll 2>&1 &
+        nohup dotnet SiteContagem.dll > ${{ env.LOG_EXECUTION_WEB }} 2>&1 &
         echo 'Aguardando a inicialização da aplicação a ser testada...'
         sleep 10s
     - name: Testes de carga com k6
       uses: grafana/k6-action@v0.2.0
       with:
         filename: ${{ env.TEST_SCRIPTS }}
+    - name: Executar log execução da aplicação após testes
+      run: cat ${{ env.LOG_EXECUTION_WEB }}
 
   build:
     needs: [tests]
