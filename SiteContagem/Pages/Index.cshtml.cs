@@ -22,8 +22,8 @@ public class IndexModel : PageModel
 
         // FIXME: trecho criado para simular falhas e permitir
         // a análise de problemas com a ferramenta k6s
-        if (valorAtual % 4 == 0)
-            throw new Exception("Simulação de falha");
+        //if (valorAtual % 4 == 0)
+        //    throw new Exception("Simulação de falha");
 
         TempData["Contador"] = valorAtual;
         TempData["Local"] = _CONTADOR.Local;
