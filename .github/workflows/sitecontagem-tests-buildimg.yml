@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 env:
-  ASPNETCORE_URLS: 'http://localhost:9000'
+  ASPNETCORE_URLS: 'http://localhost:5000'
   DIR_WEBAPP: './SiteContagem'
   LOG_EXECUTION_WEB: 'execution-webapp.log'
   DIR_TESTS: './Tests'
