@@ -9,6 +9,7 @@ on:
 env:
   DIR_WEBAPP: ./SiteContagem
   TEST_SCRIPTS: ./Tests/tests-sitecontagem.js
+  ASPNETCORE_URLS: 'http://localhost:5000'
   
 jobs:
 
@@ -24,7 +25,7 @@ jobs:
         dotnet-version: 6.0.100
     - name: Executar a aplicação a ser testada em background (nohup)
       run: |
-        dotnet publish $(Path_Projeto) -c Release -o app
+        dotnet publish $(SiteContagem) -c Release -o app
         cd ./app
         nohup dotnet SiteContagem.dll 2>&1 &
         echo 'Aguardando a inicialização da aplicação a ser testada...'
