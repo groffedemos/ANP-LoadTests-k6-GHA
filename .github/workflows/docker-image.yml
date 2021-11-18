@@ -9,7 +9,7 @@ on:
 env:
   ASPNETCORE_URLS: 'http://localhost:5000'
   DIR_WEBAPP: './SiteContagem'
-  LOG_EXECUTION_WEB: './execution-webapp.log'
+  LOG_EXECUTION_WEB: 'execution-webapp.log'
   TEST_SCRIPTS: './Tests/tests-sitecontagem.js'
   
 jobs:
@@ -35,6 +35,10 @@ jobs:
       uses: grafana/k6-action@v0.2.0
       with:
         filename: ${{ env.TEST_SCRIPTS }}
+    - name: Testes
+      if: always()
+      run: |
+        curl http://localhost:5000
     - name: Executar log execução da aplicação após testes
       if: always()
       run: |
