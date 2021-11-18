@@ -37,7 +37,9 @@ jobs:
         filename: ${{ env.TEST_SCRIPTS }}
     - name: Executar log execução da aplicação após testes
       if: always()
-      run: cat ${{ env.LOG_EXECUTION_WEB }}
+      run: |
+        cd ./app
+        cat ${{ env.LOG_EXECUTION_WEB }}
 
   build:
     needs: [tests]
