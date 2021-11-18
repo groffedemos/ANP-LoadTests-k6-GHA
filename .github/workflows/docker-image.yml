@@ -7,10 +7,12 @@ on:
     branches: [ main ]
 
 env:
-  ASPNETCORE_URLS: 'http://localhost:5000'
+  ASPNETCORE_URLS: 'http://localhost:9000'
   DIR_WEBAPP: './SiteContagem'
   LOG_EXECUTION_WEB: 'execution-webapp.log'
-  TEST_SCRIPTS: './Tests/tests-sitecontagem.js'
+  DIR_TESTS: './Tests'
+  TEST_SCRIPTS: 'tests-sitecontagem.js'
+  #TEST_SCRIPTS: './Tests/tests-sitecontagem.js'
   
 jobs:
 
@@ -38,7 +40,7 @@ jobs:
     - name: Testes
       if: always()
       run: |
-        curl http://localhost:5000
+        curl http://localhost:9000
     - name: Executar log execução da aplicação após testes
       if: always()
       run: |
